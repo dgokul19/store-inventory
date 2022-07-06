@@ -1,12 +1,11 @@
-import { Fragment, useState, useEffect, useId } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 
 import { Close, ArrowDropDown } from '@material-ui/icons';
 import { Button, TextField, Menu, MenuItem, FormControl,  Select } from '@material-ui/core';
 
 import { DEFAULT_FIELD_TYPES } from '../Util/constants';
-import { categoryActios } from '../reducer/manageCategory';
-import { randomString } from '../Util/helper';
+import { randomString, isEqual } from '../Util/helper';
 
 import './style/category.scss';
 
@@ -44,7 +43,6 @@ const CategoryType = ({ details, updateParent, itemIndex }) => {
     
     const handleFieldChange = (e, fieldIndex) => {
         const { name, value } = e.target;
-
         let tempField = [ ...categoryObject.categoryFields];
         tempField[fieldIndex][name] = value;
 
@@ -61,6 +59,15 @@ const CategoryType = ({ details, updateParent, itemIndex }) => {
     const manageParentState = () => {
         updateParent(itemIndex, categoryObject);
     };
+
+
+    useEffect(() => {
+        if(JSON.stringify(categoryObject) !== JSON.stringify(details)){
+            manageParentState();
+        } else if(isEqual(categoryObject.categoryFields, details.categoryFields)) {
+             manageParentState();
+        }
+    },[categoryObject]);
 
     return (
         <Fragment>
