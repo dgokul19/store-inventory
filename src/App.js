@@ -7,7 +7,7 @@ import {
   Route
 } from "react-router-dom";
 import Dashboard from './client/components/Dashboard.jsx';
-import ManageBoard from './client/components/ManageBoard';
+import ManageBoard from './client/components/ManageBoard/ManageBoard';
 
 import store from './client/store-setup';
 

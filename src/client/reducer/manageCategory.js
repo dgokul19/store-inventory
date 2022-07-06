@@ -3,11 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 const manageCategorySlice = createSlice({
     name: 'manageCategory',
     initialState: {
-        categoryList : []
+        categoryList : [],
+        isCategoryUpdated : false
     },
     reducers: {
         updateCategoryList: (state, action) => {
-            state.categoryList = [ ...action.payload ]
+            state.isCategoryUpdated = true; 
+            state.categoryList = [ ...action.payload ];
+        },
+
+        updateCategoryState : (state, action) => {
+            state.isCategoryUpdated = action.payload
         }
     }
 });

@@ -40,7 +40,7 @@ const Dashboard = () => {
     const openFieldMenu = (e) => {
         if (activeType !== 'all') {
             let tempList = [...product];
-            if(!tempList.length) {
+            if (!tempList.length) {
                 let findType = categoryList.find(val => val.categoryId === activeType);
                 createNewItem(findType);
             } else {
@@ -51,50 +51,60 @@ const Dashboard = () => {
             setOpenField(e.currentTarget);
         }
     };
+
+    const updateParentState = (itemIndex, updatedValue) => {
+        let tempList = [...product];
+        tempList[itemIndex] = updatedValue;
+        setProduct(tempList);
+    };
+
     const handleCloseFields = (e) => {
         setOpenField(null);
     };
 
+
     useEffect(() => {
-        let data = [...itemList];
-        if (data.length) {      
-            const { categoryId } = params;
-
-            if (categoryId) {
-                data = data.filter(item => item.categoryId === categoryId);
-                setProduct(data);
-            } else if(itemList.length !== product.length){
-                setProduct(data);
+        if (itemList.length === 0) {
+            if (categoryList.length) {
+                setCategory(categoryList);
+                setProduct(categoryList);
+                dispatch(itemActions.updateItemsList(categoryList));
             }
-
-            setActiveType(categoryId ? categoryId : 'all');
         } else {
-            let tempList = [...product];
-            if(tempList.length) {
-                dispatch(itemActions.updateItemsList(tempList));
+            if (!params.categoryId) {
+                // let productList = [...product];
+                // productList.forEach(list => {
+                //     let existObject = categoryList.find(val => val.categoryId !== list.categoryId);
+                //     if (existObject) {
+                //         productList.push(existObject);
+                //         setProduct(productList);
+                //         dispatch(itemActions.updateItemsList(productList));
+                //     }
+                // });
+                setProduct(itemList);
             }
         }
-
-    }, [params, itemList]);
+        if (category.length === 0) {
+            setCategory(categoryList);
+        }
+    }, [itemList, categoryList]);
 
     useEffect(() => {
-        if(category.length === 0) {
-            setCategory(categoryList);
-            dispatch(itemActions.updateItemsList(categoryList));
-        } else if (categoryList.length !== category.length) {
-            let tempCateg = [...categoryList];
-            let tempList = [ ...product];
-            tempList.forEach(list => {
-                let isAvailable = tempCateg.find(val => val.categoryId !== list.categoryId);
-                if(isAvailable){
-                    tempList.push(isAvailable)
-                }
-            });
-
-            setCategory(categoryList);
-            dispatch(itemActions.updateItemsList(tempList));
+        const { categoryId } = params;
+        let data = [...itemList];
+        if (categoryId) {
+            if (categoryId !== 'all') {
+                data = data.filter(item => item.categoryId === categoryId);
+            }
+            console.log('filtered', data);
+            setProduct(data);
+        } else {
+            setProduct(data);
         }
-    },[categoryList]);
+        setActiveType(categoryId ? categoryId : 'all');
+    }, [params]);
+
+    // console.log('product', product);
 
     return (
         <Fragment>
@@ -137,7 +147,12 @@ const Dashboard = () => {
 
                     <div className="categoryList">
                         {
-                            product?.map((item, index) => <ProductComponent key={index.toString()} details={item} itemIndex={index} removeItem={removeItemfromList} />)
+                            product?.map((item, index) => <ProductComponent
+                                key={index.toString()}
+                                details={item}
+                                itemIndex={index}
+                                handleParentState={updateParentState}
+                                removeItem={removeItemfromList} />)
                         }
                     </div>
                     {categoryList.length === 0 && <Link to='/manage'><h3>Create a category !!</h3></Link>}

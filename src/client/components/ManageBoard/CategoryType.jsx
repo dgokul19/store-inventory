@@ -4,15 +4,18 @@ import { useDispatch } from 'react-redux';
 import { Close, ArrowDropDown } from '@material-ui/icons';
 import { Button, TextField, Menu, MenuItem, FormControl,  Select } from '@material-ui/core';
 
-import { DEFAULT_FIELD_TYPES } from '../Util/constants';
-import { randomString, isEqual } from '../Util/helper';
+import FieldType from './ManageFieldType';
 
-import './style/category.scss';
+import { DEFAULT_FIELD_TYPES } from '../../Util/constants';
+import { randomString } from '../../Util/helper';
+
+import '../style/category.scss';
 
 const CategoryType = ({ details, updateParent, itemIndex, removeCategory }) => {
     const dispatch = useDispatch();
     const uniqueCategoryId = randomString(20);
     const [categoryObject, setCategoryObject] = useState({ ...details, categoryId : details.categoryId ? details.categoryId : uniqueCategoryId});
+    const [stateModify, updateStateModify] = useState(false);
     const [openField, setOpenField] = useState();
 
     const addNewField = (newField) => {
@@ -25,6 +28,7 @@ const CategoryType = ({ details, updateParent, itemIndex, removeCategory }) => {
             ...categoryObject,
             categoryFields : tempFieldslist
         });
+        updateStateModify(true);
         setOpenField(null);
 
     };
@@ -41,15 +45,14 @@ const CategoryType = ({ details, updateParent, itemIndex, removeCategory }) => {
         });
     };
     
-    const handleFieldChange = (e, fieldIndex) => {
-        const { name, value } = e.target;
-        let tempField = [ ...categoryObject.categoryFields];
-        tempField[fieldIndex][name] = value;
-
+    const handleFieldChange = (fieldIndex, updatedValue) => {
+        let tempFields = [ ...categoryObject.categoryFields];
+        tempFields[fieldIndex] = updatedValue;
         setCategoryObject({
             ...categoryObject,
-            categoryFields : tempField
+             categoryFields : tempFields
         });
+        updateStateModify(true);
     };
 
     const handleCloseFields = () => {
@@ -62,12 +65,11 @@ const CategoryType = ({ details, updateParent, itemIndex, removeCategory }) => {
 
 
     useEffect(() => {
-        if(JSON.stringify(categoryObject) !== JSON.stringify(details)){
+        if(stateModify){
             manageParentState();
-        } else if(isEqual(categoryObject.categoryFields, details.categoryFields)) {
-             manageParentState();
-        }
-    },[categoryObject]);
+            updateStateModify(false);
+        }  
+    },[stateModify]);
 
     return (
         <Fragment>
@@ -100,17 +102,7 @@ const CategoryType = ({ details, updateParent, itemIndex, removeCategory }) => {
                     </div>
                     <h4>Fields</h4>
                     {
-                        categoryObject.categoryFields.map((categoryField, index) => {
-                            return (
-                                <div key={index.toString()} className="formElement bordered">
-                                    <input placeholder={`Enter a value`} name={`label`} value={categoryField.label} onChange={(e) => handleFieldChange(e, index)}/>
-                                    <select value={categoryField.fieldType} onChange={(e) => handleFieldChange(e, index)}>
-                                        {DEFAULT_FIELD_TYPES.map(value => <option key={value} value={value}>{value}</option>)}
-                                        <option disabled={categoryObject.categoryFields.length === 1} value={`delete`}>{`Delete`}</option>
-                                    </select>
-                                </div>
-                            )
-                        })
+                        categoryObject.categoryFields.map((categoryField, index) => <FieldType key={index.toString()} fieldIndex={index} updateField={handleFieldChange} fieldDetails={categoryField}/>)
                     }
 
                     <Button className='newFieldAdd' aria-haspopup="true" onClick={openFieldMenu}>
