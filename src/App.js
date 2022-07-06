@@ -21,6 +21,7 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={<Dashboard />}></Route>
+            <Route path="/:categoryId" element={<Dashboard />}></Route>
             <Route path="/manage" element={<ManageBoard />}></Route>
           </Routes>
         </Router>

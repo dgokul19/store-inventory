@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from "react";
+import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Menu, MenuItem, Chip } from '@material-ui/core';
 
@@ -10,10 +10,12 @@ import Header from './Header';
 import ProductComponent from './ProductComponent';
 
 import './style/dashboard.scss';
-import { useEffect } from "react";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
+    const params = useParams();
+    console.log({ params });
+    const [activeType, setActiveType] = useState('all');
     const [openField, setOpenField] = useState();
     const { categoryList } = useSelector((state) => state.manageCategory);
     const { itemList } = useSelector((state) => state.manageItems);
@@ -41,7 +43,16 @@ const Dashboard = () => {
     const handleCloseFields = (e) => {
         setOpenField(null);
     };
-
+    
+    useEffect(() => {
+        const { categoryId } = params;
+         let data = [...itemList];
+        if (categoryId) {
+            data = data.filter(item => item.categoryId === categoryId);
+        }
+        setProduct(data);
+        setActiveType(categoryId ? categoryId : 'all');
+    },[params]); 
 
     return (
         <Fragment>
@@ -51,19 +62,25 @@ const Dashboard = () => {
                     <div className="topFilterList">
                         <div className="categoryFilters">
                             <ul className={`flex gap1`}>
-                                <li> <Chip clickable label={`All`}/></li>
+                                <li className={`${activeType === 'all' ? 'active' : ''}`}> 
+                                    <Link to={`/`}>
+                                        <Chip clickable label={`All`} />
+                                    </Link>
+                                </li>
                                 {
-                                    categoryList.map((data, index) => {
+                                    categoryList.map((data) => {
                                         return (
-                                        <li key={data.categoryType}>
-                                            <Chip
-                                                clickable
-                                                label={data.categoryType}
-                                            />
-                                        </li>
+                                            <li className={activeType === data.categoryId ? 'active' : ''} key={data.categoryId}>
+                                                <Link to={`/${data.categoryId}`}>
+                                                    <Chip
+                                                        clickable
+                                                        label={data.categoryType}
+                                                    />
+                                                </Link>
+                                            </li>
                                         )
                                     })
-                                }       
+                                }
                             </ul>
                         </div>
                         <span>
@@ -75,7 +92,7 @@ const Dashboard = () => {
 
                     <div className="categoryList">
                         {
-                            itemList?.map((item, index) => <ProductComponent key={index.toString()} details={item} itemIndex={index} removeItem={removeItemfromList} />)
+                            product.map((item, index) => <ProductComponent key={index.toString()} details={item} itemIndex={index} removeItem={removeItemfromList} />)
                         }
                     </div>
                     {categoryList.length === 0 && <Link to='/manage'><h3>Create a category !!</h3></Link>}

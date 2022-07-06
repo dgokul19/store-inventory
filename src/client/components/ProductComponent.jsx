@@ -13,6 +13,11 @@ const ProductComponent = ({ details, itemIndex, removeItem }) => {
 
     const [itemObject, setItemObject] = useState({ ...details });
 
+    useEffect(() => {
+        if (details.categoryType !== itemObject.categoryType) {
+            setItemObject(details);
+        }
+    }, [details]);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         // setCategoryObject({
@@ -20,11 +25,12 @@ const ProductComponent = ({ details, itemIndex, removeItem }) => {
         //     [name]: value
         // });
     };
+    console.log('itemObject', itemObject);
 
     return (
         <Fragment>
             <div className='categoryBox'>
-                <h4 className="titleLabel">{itemObject.categoryType} - {itemObject.categoryTitle}<Close className="closeIcon" onClick={() => removeItem(itemIndex)}/></h4>
+                <h4 className="titleLabel">{itemObject.categoryType} - {itemObject.categoryTitle}<Close className="closeIcon" onClick={() => removeItem(itemIndex)} /></h4>
                 <div className="categoryDetails flexColumn gap1">
                     {
                         itemObject.categoryFields.map(fields => {

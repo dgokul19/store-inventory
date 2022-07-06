@@ -29,6 +29,14 @@
         justify-content: space-between;
         ul {
             list-style: none;
+            li {
+                &.active{
+                    .MuiChip-root{
+                        background-color: var(--theme-secondary);
+                        color: var(--theme-white);
+                    }
+                }
+            }
         }
     }
     .categoryList{
