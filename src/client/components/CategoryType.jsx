@@ -9,7 +9,7 @@ import { randomString, isEqual } from '../Util/helper';
 
 import './style/category.scss';
 
-const CategoryType = ({ details, updateParent, itemIndex }) => {
+const CategoryType = ({ details, updateParent, itemIndex, removeCategory }) => {
     const dispatch = useDispatch();
     const uniqueCategoryId = randomString(20);
     const [categoryObject, setCategoryObject] = useState({ ...details, categoryId : details.categoryId ? details.categoryId : uniqueCategoryId});
@@ -73,7 +73,7 @@ const CategoryType = ({ details, updateParent, itemIndex }) => {
         <Fragment>
             <div className='categoryBox'>
 
-                <h4 className="titleLabel">{categoryObject.categoryType ? categoryObject.categoryType : 'Category Type'}<Close className="closeIcon" /></h4>
+                <h4 className="titleLabel">{categoryObject.categoryType ? categoryObject.categoryType : 'Category Type'}<Close className="closeIcon" onClick={() => removeCategory(itemIndex)}/></h4>
                 <div className="categoryDetails flexColumn gap1">
                     <div className="formElement">
                         <TextField className='customInput' 

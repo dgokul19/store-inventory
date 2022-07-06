@@ -28,6 +28,12 @@ const ManageBoard = () => {
         tempCategory[parentIndex] = modifiedObject;
         dispatch(categoryActions.updateCategoryList(tempCategory));
     };
+  
+    const removeCategory = (parentIndex) => {
+         let tempList = [...categoryList]
+        tempList.splice(parentIndex, 1);
+        dispatch(categoryActions.updateCategoryList(tempList));
+    };
 
     return (
         <Fragment>
@@ -36,7 +42,7 @@ const ManageBoard = () => {
                 <div className="bodyContainer">
                     <Add className="createIcon" onClick={createCategory}/>
                     <div className="categoryList">
-                        {categoryList.map((list, index) => <CategoryType key={index.toString()} details={list} itemIndex={index} updateParent={updateParentState}/>)}
+                        {categoryList.map((list, index) => <CategoryType key={index.toString()} details={list} itemIndex={index} removeCategory={removeCategory} updateParent={updateParentState}/>)}
                     </div>
                 </div>
             </div>
