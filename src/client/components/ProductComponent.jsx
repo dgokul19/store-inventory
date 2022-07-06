@@ -25,7 +25,6 @@ const ProductComponent = ({ details, itemIndex, removeItem }) => {
         //     [name]: value
         // });
     };
-    console.log('itemObject', itemObject);
 
     return (
         <Fragment>

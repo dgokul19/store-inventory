@@ -6,12 +6,13 @@ import { Button, TextField, Menu, MenuItem, FormControl,  Select } from '@materi
 
 import { DEFAULT_FIELD_TYPES } from '../Util/constants';
 import { categoryActios } from '../reducer/manageCategory';
+import { randomString } from '../Util/helper';
 
 import './style/category.scss';
 
 const CategoryType = ({ details, updateParent, itemIndex }) => {
     const dispatch = useDispatch();
-    const uniqueCategoryId = useId();
+    const uniqueCategoryId = randomString(10);
     const [categoryObject, setCategoryObject] = useState({ ...details, categoryId : details.categoryId ? details.categoryId : uniqueCategoryId});
     const [openField, setOpenField] = useState();
 
