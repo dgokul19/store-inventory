@@ -12,7 +12,7 @@ import './style/category.scss';
 
 const CategoryType = ({ details, updateParent, itemIndex }) => {
     const dispatch = useDispatch();
-    const uniqueCategoryId = randomString(10);
+    const uniqueCategoryId = randomString(20);
     const [categoryObject, setCategoryObject] = useState({ ...details, categoryId : details.categoryId ? details.categoryId : uniqueCategoryId});
     const [openField, setOpenField] = useState();
 

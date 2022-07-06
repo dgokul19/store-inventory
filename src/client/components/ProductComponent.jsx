@@ -8,7 +8,7 @@ import { itemActions } from '../reducer/manageItems';
 
 import './style/category.scss';
 
-const ProductComponent = ({ details, itemIndex, removeItem }) => {
+const ProductComponent = ({ details={}, itemIndex, removeItem }) => {
     const dispatch = useDispatch();
 
     const [itemObject, setItemObject] = useState({ ...details });
@@ -29,10 +29,10 @@ const ProductComponent = ({ details, itemIndex, removeItem }) => {
     return (
         <Fragment>
             <div className='categoryBox'>
-                <h4 className="titleLabel">{itemObject.categoryType} - {itemObject.categoryTitle}<Close className="closeIcon" onClick={() => removeItem(itemIndex)} /></h4>
+                <h4 className="titleLabel">{itemObject?.categoryType} - {itemObject?.categoryTitle}<Close className="closeIcon" onClick={() => removeItem(itemIndex)} /></h4>
                 <div className="categoryDetails flexColumn gap1">
                     {
-                        itemObject.categoryFields.map(fields => {
+                        itemObject?.categoryFields?.map(fields => {
                             return (
                                 <div key={fields.label} className="formElement">
                                     <TextField className='customInput'

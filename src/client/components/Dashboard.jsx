@@ -17,15 +17,15 @@ const Dashboard = () => {
     const params = useParams();
     const [activeType, setActiveType] = useState('all');
     const [openField, setOpenField] = useState();
+
     const { categoryList } = useSelector((state) => state.manageCategory);
     const { itemList } = useSelector((state) => state.manageItems);
 
-    const items = itemList.length === 0 ? categoryList : itemList;
-
-    const [product, setProduct] = useState(items);
+    const [category, setCategory] = useState([]);
+    const [product, setProduct] = useState([]);
 
     const createNewItem = (newItems) => {
-        let tempList = [...product];
+        let tempList = [...itemList];
         tempList.push({ ...newItems });
         dispatch(itemActions.updateItemsList(tempList));
         handleCloseFields();
@@ -40,7 +40,13 @@ const Dashboard = () => {
     const openFieldMenu = (e) => {
         if (activeType !== 'all') {
             let tempList = [...product];
-            createNewItem(tempList[0]);
+            if(!tempList.length) {
+                let findType = categoryList.find(val => val.categoryId === activeType);
+                createNewItem(findType);
+            } else {
+                createNewItem(tempList[0]);
+            }
+
         } else {
             setOpenField(e.currentTarget);
         }
@@ -51,13 +57,16 @@ const Dashboard = () => {
 
     useEffect(() => {
         let data = [...itemList];
-        if (data.length) {
+        if (data.length) {      
             const { categoryId } = params;
 
             if (categoryId) {
                 data = data.filter(item => item.categoryId === categoryId);
+                setProduct(data);
+            } else if(itemList.length !== product.length){
+                setProduct(data);
             }
-            setProduct(data);
+
             setActiveType(categoryId ? categoryId : 'all');
         } else {
             let tempList = [...product];
@@ -67,6 +76,25 @@ const Dashboard = () => {
         }
 
     }, [params, itemList]);
+
+    useEffect(() => {
+        if(category.length === 0) {
+            setCategory(categoryList);
+            dispatch(itemActions.updateItemsList(categoryList));
+        } else if (categoryList.length !== category.length) {
+            let tempCateg = [...categoryList];
+            let tempList = [ ...product];
+            tempList.forEach(list => {
+                let isAvailable = tempCateg.find(val => val.categoryId !== list.categoryId);
+                if(isAvailable){
+                    tempList.push(isAvailable)
+                }
+            });
+
+            setCategory(categoryList);
+            dispatch(itemActions.updateItemsList(tempList));
+        }
+    },[categoryList]);
 
     return (
         <Fragment>
@@ -109,7 +137,7 @@ const Dashboard = () => {
 
                     <div className="categoryList">
                         {
-                            product.map((item, index) => <ProductComponent key={index.toString()} details={item} itemIndex={index} removeItem={removeItemfromList} />)
+                            product?.map((item, index) => <ProductComponent key={index.toString()} details={item} itemIndex={index} removeItem={removeItemfromList} />)
                         }
                     </div>
                     {categoryList.length === 0 && <Link to='/manage'><h3>Create a category !!</h3></Link>}

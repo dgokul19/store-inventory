@@ -17,7 +17,6 @@ const ManageBoard = () => {
     const dispatch = useDispatch();
     const { categoryList } = useSelector((state) => state.manageCategory);
     
-    console.log('board', categoryList);
     const createCategory = () => {
         let tempCategory = [...categoryList];
         tempCategory.push({ ...CATEGORY_TYPES });
