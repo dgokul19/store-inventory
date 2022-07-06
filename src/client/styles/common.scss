@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.bodyContainer {
+    flex: 1;
+    height: calc(100% - 60px);
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.spaceBetween {
+    justify-content: space-between;
+}
+
+.flexVerticalCenter {
+    display: flex;
+    align-items: center;
+}
+
+.gap1 {
+    gap: 1rem;
+}
+
+.menuOptions {
+    text-transform: capitalize;
+}

@@ -1,0 +1,10 @@
+.headerContainer{
+    flex: 1;
+    padding: 1rem 0;
+    background-color: var(--theme-secondary);
+    display: flex;
+    color: var(--theme-white);
+    a {
+        color: inherit;
+    }
+}

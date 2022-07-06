@@ -1,0 +1,64 @@
+.categoryBox {
+    position: relative;
+
+    .titleLabel {
+        position: inherit;
+        background-color: var(--theme-light);
+        display: flex;
+        padding: 1rem;
+        color: var(--theme-dark);
+
+        .closeIcon {
+            position: absolute;
+            right: 1rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    }
+
+    .categoryDetails {
+        padding: 1rem;
+
+        .formElement {
+            flex: 1;
+            border-radius: 5px;
+
+            &.bordered {
+                border: 1px solid rgba(0, 0, 0, 0.23);
+
+                input {
+                    border: none;
+                    width: 60%;
+                    height: 56px;
+                    text-indent: 10px;
+                    font-size: 1rem;
+                    text-transform: capitalize;
+                }
+
+                select {
+                    border: none;
+                    height: 56px;
+                    width: 40%;
+                    min-width: 120px;
+                    background-color: rgba(85, 85, 85, .3);
+                    text-transform: capitalize;
+                    font-size: 1rem;
+                    color: #555;
+                    text-align: center;
+                }
+            }
+
+            .customInput, .customSelect {
+                width: 100%;
+                input,select {
+                    text-transform: capitalize;
+                }
+            }
+        }
+        .newFieldAdd{
+            text-transform: capitalize;
+            background-color: var(--theme-dark);
+            color: var(--theme-white);
+        }
+    }
+}

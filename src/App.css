@@ -1,0 +1,6 @@
+@import url('./client/styles/cssVariables.css');
+.wrapperContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--theme-primary);
+}
