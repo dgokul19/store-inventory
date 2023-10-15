@@ -1,32 +1,29 @@
+import { Fragment } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Provider } from 'react-redux';
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import Dashboard from './client/components/Dashboard.jsx';
-import ManageBoard from './client/components/ManageBoard/ManageBoard';
+import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
+import ManageBoard from "./components/ManageBoard";
 
-import store from './client/store-setup';
-
-import './App.css';
-import './client/styles/common.scss';
+import classes from "./styles/index.module.scss";
+import "./styles/App.css";
+import "./styles/common.scss";
 
 function App() {
   return (
-    <div className="wrapperContainer">
-      <Provider store={store}>
-        <Router>
+    <Fragment>
+      <BrowserRouter>
+      <Header />
+        <div className={classes.wrapperContainer}>
           <Routes>
-            <Route exact path="/" element={<Dashboard />}></Route>
-            <Route path="/:categoryId" element={<Dashboard />}></Route>
-            <Route path="/manage" element={<ManageBoard />}></Route>
+            <Route path="/" element={<Dashboard />}/>
+            <Route exact path="/type/:categoryId" element={<Dashboard />}/>
+            <Route exact path="/types" element={<ManageBoard />}/>
           </Routes>
-        </Router>
-      </Provider>
-    </div>
+        </div>
+      </BrowserRouter>
+    </Fragment>
   );
 }
 

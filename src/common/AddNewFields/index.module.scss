@@ -1,0 +1,83 @@
+
+
+// InlineSelect Components
+.fieldSelection{
+    position: relative;
+    background-color: #4fa3a5;
+    height: 100%;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    label{
+        font-size: .85rem;
+        color: #fff !important;
+        font-weight: 400 !important;
+        display: flex;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .selectionBox{
+        width: 100%;
+        background-color: aliceblue;
+        border-radius: 4px;
+        position: absolute;
+        top: 105%;
+        border: 1px solid #212121;
+        z-index: 9;
+        ul{
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            li{
+                max-width: none;
+                font-size: .8rem;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+            // Add Field Button
+.newFieldButton{
+    position: relative;
+    background-color: #4fa3a5;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    label{
+        font-size: .85rem;
+        color: #fff !important;
+        font-weight: 400 !important;
+        display: flex;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .selectionBox{
+        width: 100%;
+        background-color: aliceblue;
+        border-radius: 4px;
+        position: absolute;
+        top: 105%;
+        border: 1px solid #212121;
+        z-index: 9;
+        ul{
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            li{
+                max-width: none;
+                font-size: .8rem;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}

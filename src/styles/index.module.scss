@@ -1,0 +1,59 @@
+.headerContainer{
+    height: 50px;
+    background-color: #ededed;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    h3{
+        margin: 0;
+        color: #4fa3a5;
+        text-transform: uppercase;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        li{
+            a {
+                color: #212121;
+            }
+        }
+    }
+}
+
+.wrapperContainer{
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardContainer{
+    padding: 1rem;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    ul{
+        flex: 1;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 1rem;
+        li{
+            flex: 1;
+            max-width: 22%;
+            .newAddBtn{
+                width: 80%;
+                height: 45px;
+                background-color: #ED6B5B;
+                border-radius: 30px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+}
