@@ -9,7 +9,7 @@ import { FIELDS_TYPE } from "../../common/constant";
 import {
     UPDATE_CATEGORY_FIELDS,
     UPDATE_CATEGORY_FIELD_TYPE,
-    ADD_CATEGORY_FIELD_TYPE
+    UPDATE_PRODUCT_TITLES
 } from "../../store/action";
 
 import classes from "./index.module.scss";
@@ -25,6 +25,13 @@ const AddCategoryBox = ({ deleteCategory, form={}}) => {
             type : UPDATE_CATEGORY_FIELDS,
             payload : { category : category }
         })
+
+        if('categoryTitle' === name){
+            dispatch({
+                type : UPDATE_PRODUCT_TITLES,
+                payload : { productTitle : value }
+            })
+        }
     };
 
     const handleNewFields = (newField) => {

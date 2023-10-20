@@ -1,10 +1,11 @@
 import { createStore, combineReducers } from 'redux';
 
-import categoryReducer from './reducer/categoryReducer';
+import storeReducer from './reducer/storeReducer';
+import productReducer from './reducer/productReducer';
 
 const saveToLocalStorage = (state) => {
   try {
-    localStorage.setItem('state', JSON.stringify(state));
+    sessionStorage.setItem('state', JSON.stringify(state));
   } catch (e) {
     console.error(e);
   }
@@ -12,7 +13,7 @@ const saveToLocalStorage = (state) => {
 
 const loadFromLocalStorage = () => {
   try {
-    const stateStr = localStorage.getItem('state');
+    const stateStr = sessionStorage.getItem('state');
     return stateStr ? JSON.parse(stateStr) : undefined;
   } catch (e) {
     console.error(e);
@@ -21,15 +22,18 @@ const loadFromLocalStorage = () => {
 };
 
 const rootReducer = combineReducers({
-  categoryList: categoryReducer
+  storeList: storeReducer,
+  productList : productReducer
 });
 
 const persistedStore = loadFromLocalStorage();
 
 const store = createStore(rootReducer, persistedStore);
 
-store.subscribe(() => store.getState());
+// store.subscribe(() => {
 //   saveToLocalStorage(store.getState());
 // });
+
+store.subscribe(() => store.getState());
 
 export default store;

@@ -1,0 +1,27 @@
+{
+    "product": [
+        {
+            "id": "7300bc18-625b-4548-9a5e-3ccbd249b5cb",
+            "categoryId": "56250299-d2a6-4013-88c0-3dfff7b34446",
+            "categoryType": "Electronics",
+            "productTitle": "Gadgets",
+            "productFields": [
+                {
+                    "label": "Gadgets",
+                    "fieldType": "Small text",
+                    "value": "Mobile"
+                },
+                {
+                    "label": "Brand",
+                    "fieldType": "Small text",
+                    "value": "Apple"
+                },
+                {
+                    "label": "Quantity",
+                    "fieldType": "Numbers",
+                    "value": "5"
+                }
+            ]
+        }
+    ]
+}

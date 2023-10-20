@@ -1,0 +1,42 @@
+{
+    "category": [
+        {
+            "id": "88be56d3-2947-47db-b660-98df7fb6489c",
+            "categoryName": "Clothings",
+            "categoryTitle": "Title",
+            "categoryFields": [
+                {
+                    "label": "Shirt",
+                    "fieldType": "Small text"
+                },
+                {
+                    "label": "Brand",
+                    "fieldType": "Small text"
+                },
+                {
+                    "label": "Quantity",
+                    "fieldType": "Numbers"
+                }
+            ]
+        },
+        {
+            "id": "56250299-d2a6-4013-88c0-3dfff7b34446",
+            "categoryName": "Electronics",
+            "categoryTitle": "Title",
+            "categoryFields": [
+                {
+                    "label": "Gadgets",
+                    "fieldType": "Small text"
+                },
+                {
+                    "label": "Brand",
+                    "fieldType": "Small text"
+                },
+                {
+                    "label": "Quantity",
+                    "fieldType": "Numbers"
+                }
+            ]
+        }
+    ]
+}

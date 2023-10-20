@@ -1,0 +1,65 @@
+
+.addCategoryContainer{
+    width: 100%;
+    min-height: 200px;
+    position: relative;
+    border:1px solid #ededed;
+    border-radius: 6px;
+    
+    .categoryHeader{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 45px;
+        background-color: #ededed;
+        padding: 0 1rem;
+        label{
+            font-weight: 500;
+            color: #333;
+        }
+        i{
+            cursor: pointer;
+        }
+    }
+
+    .categoryContent{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        & > .fieldType{
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            label{
+                color: #555;
+                font-weight: 500;
+            }
+            input, select {
+                width: 100%;
+                height: 36px;
+                border: 1px solid #aaa;
+                border-radius: 4px;
+                text-indent: 10px;
+                outline: none;
+                option {
+                    height: 30px;
+                }
+            }
+        }
+    }
+}
+.newOptionalField{
+    display: flex;
+    height: 36px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    & > input{
+        border: none !important;
+        flex: 1;
+        height: 92% !important;
+        text-indent: 10px;
+        outline: none;
+    }
+}

@@ -15,9 +15,7 @@ import classes from "../styles/index.module.scss";
 const ManageDashboard = () => {
     const dispatch = useDispatch();
 
-    const { category : categoryItems } = useSelector(state => state.categoryList);
-
-    console.log({categoryItems});
+    const { category : categoryItems } = useSelector(state => state.storeList);
 
     const addNewCategory = () => {
         dispatch({

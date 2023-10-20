@@ -5,9 +5,10 @@ import {
     UPDATE_CATEGORY_FIELD_TYPE,
     UPDATE_CATEGORY
 } from "../action";
+import MOCK_DATA from "../../mock/category.json";
 
 const initState = { 
-    category : [] 
+    category : [...MOCK_DATA.category]
 };
 
 
