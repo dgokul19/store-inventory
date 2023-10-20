@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 
 // Util import
 import {
+    REMOVE_NEW_PRODUCT,
     UPDATE_PRODUCT_FIELDS 
 } from "../../store/action";
 
 import classes from "./index.module.scss";
 
-const ProductBox = ({ deleteProduct, form={}}) => {
+const ProductBox = ({ form={}}) => {
     const dispatch = useDispatch();
 
     const productTitle = useMemo(() => {
@@ -24,6 +25,13 @@ const ProductBox = ({ deleteProduct, form={}}) => {
         dispatch({
             type : UPDATE_PRODUCT_FIELDS,
             payload : { productId: form?.id, fields : fieldsClone }
+        })
+    };
+
+    const deleteProduct = (productId) => {
+        dispatch({
+            type : REMOVE_NEW_PRODUCT,
+            payload : { productId : productId }
         })
     };
 
