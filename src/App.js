@@ -13,7 +13,7 @@ import "./styles/common.scss";
 function App() {
   return (
     <Fragment>
-      <BrowserRouter>
+      <BrowserRouter basename="/store-inventory">
       <Header />
         <div className={classes.wrapperContainer}>
           <Routes>

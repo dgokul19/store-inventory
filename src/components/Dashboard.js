@@ -20,11 +20,13 @@ const Dashboard = () => {
     const { product : originalProducts } = useSelector(state => state?.productList);
     const { category } = useSelector(state => state?.storeList);
 
-    console.log({originalProducts});
-    
-    console.log({category});
-
-    const productList = useMemo(() => originalProducts.filter(product => product?.categoryId === categoryId), [originalProducts, categoryId]);
+    const productList = useMemo(() => {
+        if(categoryId){          
+            return originalProducts.filter(product => product?.categoryId === categoryId);
+        } else {
+            return originalProducts;
+        }
+    }, [originalProducts, categoryId]);
     const categoryFeature = useMemo(() => category.find(item => item?.id === categoryId),[category, categoryId]);
 
     const addNewProduct = useCallback(() => {
@@ -53,12 +55,12 @@ const Dashboard = () => {
                             <ProductBox form={list}/>
                         </li>
                     ))}
-                    <li>
+                    {categoryId && <li>
                         <div className={classes.newAddBtn} onClick={addNewProduct}>
                             Add Item
                             {!categoryId && <i className="fa fa-angle-down"></i>}
                         </div>
-                    </li>
+                    </li>}
                 </ul>
             </div>
         </Fragment>
